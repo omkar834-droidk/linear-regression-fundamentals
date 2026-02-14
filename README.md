@@ -224,15 +224,15 @@ b=b−α×
 
 Where α is learning rate.
 
-Cost
-  |
-  |\
-  | \
-  |  \
-  |   \
-  |    \____
-  |
-  +---------------- Iterations
+		Cost
+		  |
+		  |\
+		  | \
+		  |  \
+		  |   \
+		  |    \____
+		  |
+		  +---------------- Iterations
 
 
 Learning rate controls speed of convergence.
@@ -343,9 +343,9 @@ Model too simple
 High bias
 
 Poor performance on train & test
-
-Data:   ●   ●   ●
-Model:  ----------
+	
+	Data:   ●   ●   ●
+	Model:  ----------
 
 Overfitting
 
@@ -354,10 +354,10 @@ Model too complex
 High variance
 
 High train accuracy, low test accuracy
-
-Data:   ●   ●   ●
-Model:  /\/\/\/\/\/\
-
+	
+	Data:   ●   ●   ●
+	Model:  /\/\/\/\/\/\
+	
 
 Regularization helps control overfitting.
 
