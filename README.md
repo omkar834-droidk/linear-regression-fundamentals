@@ -417,3 +417,100 @@ Gradient Descent minimizes cost.
 R² evaluates model performance.
 Adjusted R² prevents misleading feature addition.
 Ridge and Lasso prevent overfitting using regularization.
+
+  
+
+
+# ================================
+# Linear Regression Full Pipeline
+# Linear vs Ridge vs Lasso
+# ================================
+
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	
+	from sklearn.datasets import load_diabetes
+	from sklearn.model_selection import train_test_split
+	from sklearn.preprocessing import StandardScaler
+	from sklearn.linear_model import LinearRegression, Ridge, Lasso
+	from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+# -------------------------------
+# 1. Load Dataset
+# -------------------------------
+
+	data = load_diabetes()
+	X = pd.DataFrame(data.data, columns=data.feature_names)
+	y = data.target
+
+# -------------------------------
+# 2. Train-Test Split
+# -------------------------------
+
+	X_train, X_test, y_train, y_test = train_test_split(
+	    X, y, test_size=0.2, random_state=42
+)
+
+# -------------------------------
+# 3. Scaling (Important for Ridge & Lasso)
+# -------------------------------
+
+	scaler = StandardScaler()
+	X_train_scaled = scaler.fit_transform(X_train)
+	X_test_scaled = scaler.transform(X_test)
+
+# -------------------------------
+# 4. Initialize Models
+# -------------------------------
+
+	models = {
+	    "Linear Regression": LinearRegression(),
+	    "Ridge Regression": Ridge(alpha=1.0),
+	    "Lasso Regression": Lasso(alpha=0.1)
+	}
+
+# -------------------------------
+# 5. Train & Evaluate
+# -------------------------------
+
+	for name, model in models.items():
+    
+    model.fit(X_train_scaled, y_train)
+    y_pred_train = model.predict(X_train_scaled)
+    y_pred_test = model.predict(X_test_scaled)
+    
+    print(f"\n========== {name} ==========")
+    
+    # Evaluation Metrics
+    print("Train R2:", r2_score(y_train, y_pred_train))
+    print("Test R2 :", r2_score(y_test, y_pred_test))
+    print("MAE     :", mean_absolute_error(y_test, y_pred_test))
+    print("MSE     :", mean_squared_error(y_test, y_pred_test))
+    print("RMSE    :", np.sqrt(mean_squared_error(y_test, y_pred_test)))
+    
+    # Adjusted R2
+    n = X_test.shape[0]
+    k = X_test.shape[1]
+    r2 = r2_score(y_test, y_pred_test)
+    adj_r2 = 1 - ((1 - r2) * (n - 1) / (n - k - 1))
+    print("Adjusted R2:", adj_r2)
+
+# -------------------------------
+# 6. Residual Plot (Linear Model)
+# -------------------------------
+
+	linear_model = LinearRegression()
+	linear_model.fit(X_train_scaled, y_train)
+    y_pred = linear_model.predict(X_test_scaled)
+
+	residuals = y_test - y_pred
+
+	plt.figure()
+	plt.scatter(y_pred, residuals)
+	plt.axhline(y=0)
+	plt.xlabel("Predicted Values")
+	plt.ylabel("Residuals")
+	plt.title("Residual Plot (Linear Regression)")
+	plt.show()
+
