@@ -118,6 +118,11 @@ Linear Regression finds the best straight line that minimizes total prediction e
                    \  Best Fit Line
 
 
+
+
+	   <img width="3024" height="2160" alt="image" src="https://github.com/user-attachments/assets/b56953bd-b615-4aaa-8ec5-93e98eafdab2" />
+
+
 The slope determines direction of relationship.
 
 4️⃣ Residuals (Error Concept)
