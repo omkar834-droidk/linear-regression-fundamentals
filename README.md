@@ -1,3 +1,5 @@
+.
+
 📘 Linear Regression – Complete Structured Notes
 1️⃣ Introduction
 
@@ -415,4 +417,3 @@ Gradient Descent minimizes cost.
 R² evaluates model performance.
 Adjusted R² prevents misleading feature addition.
 Ridge and Lasso prevent overfitting using regularization.
-
