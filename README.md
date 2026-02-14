@@ -1,26 +1,21 @@
-.
+📘 Linear Regression – Complete Structured Notes
+1️⃣ Introduction
 
-📘 Linear Regression – Complete Professional Notes
-🔹 1. What is Linear Regression?
+Linear Regression is a supervised learning algorithm used to predict continuous numerical values.
+It models the relationship between independent variables (X) and a dependent variable (Y) using a straight line.
 
-Linear Regression is a supervised machine learning algorithm used to predict continuous numerical values.
+It assumes that there is a linear relationship between input features and output.
 
-It models the relationship between independent variables (X) and dependent variable (Y) by fitting a straight line.
-
-It assumes a linear relationship between input features and output.
-
-Common use cases:
+Common examples:
 
 House price prediction
 
-Salary prediction
+Salary estimation
 
 Sales forecasting
 
-🔹 2. Mathematical Model
-
-For single feature:
-
+2️⃣ Mathematical Model
+Simple Linear Regression
 𝑦
 =
 𝑏
@@ -39,8 +34,17 @@ y=b
 
 x
 
-For multiple features:
+Where:
 
+y = Predicted value
+
+x = Input feature
+
+b₀ = Intercept
+
+b₁ = Slope
+
+Multiple Linear Regression
 𝑦
 =
 𝑏
@@ -93,33 +97,30 @@ n
 	​
 
 
-Where:
+The goal is to find coefficients that minimize error.
 
-b₀ = Intercept
+3️⃣ Line of Best Fit
 
-b₁ = Slope
+Linear Regression finds the best straight line that minimizes total prediction error.
 
-y = Predicted value
+        Y
+        |
+        |                    ●
+        |               ●
+        |          ●
+        |     ●
+        | ●
+        |________________________________ X
+                 \
+                  \
+                   \  Best Fit Line
 
-🔹 3. Line of Best Fit (Concept)
 
-The model finds the best straight line that minimizes prediction error.
+The slope determines direction of relationship.
 
-Y
-|
-|                    ●
-|               ●
-|          ●
-|     ●
-| ●
-|________________________________ X
-         \
-          \
-           \  Best Fit Line
+4️⃣ Residuals (Error Concept)
 
-🔹 4. Residuals
-
-Residual = Actual − Predicted
+Residual is the vertical distance between actual value and predicted value.
 
 𝑅
 𝑒
@@ -139,16 +140,21 @@ y
 ^
 	​
 
+           ●  (Actual)
+           |
+           |   Residual
+           |
+-----------+------------------
+          Regression Line
 
-Residual is vertical distance between data point and regression line.
 
-Good Model:
-Residuals randomly scattered around zero.
+Good model → Residuals randomly scattered
+Bad model → Residuals show pattern
 
-Bad Model:
-Residuals show pattern → non-linear relationship.
+5️⃣ Cost Function
 
-🔹 5. Cost Function (MSE)
+Linear Regression minimizes Mean Squared Error (MSE).
+
 𝑀
 𝑆
 𝐸
@@ -176,15 +182,19 @@ y
 )
 2
 
-The goal of Linear Regression is to minimize MSE.
+Why square errors?
 
-Lower MSE = Better model.
+Removes negative sign
 
-🔹 6. Gradient Descent
+Penalizes large errors more
 
-Used to minimize cost function.
+Lower MSE means better model performance.
 
-Update Rule:
+6️⃣ Gradient Descent
+
+Gradient Descent is used to minimize the cost function.
+
+Update rule:
 
 𝑏
 =
@@ -192,31 +202,48 @@ Update Rule:
 −
 𝛼
 ×
-𝑔
-𝑟
-𝑎
-𝑑
-𝑖
-𝑒
-𝑛
+∂
+𝐶
+𝑜
+𝑠
 𝑡
-b=b−α×gradient
+∂
+𝑏
+b=b−α×
+∂b
+∂Cost
+	​
 
-Learning Rate (α):
 
-Too small → Slow training
+Where α is learning rate.
 
-Too large → Overshoot
+Cost
+  |
+  |\
+  | \
+  |  \
+  |   \
+  |    \____
+  |
+  +---------------- Iterations
 
-Cost decreases gradually until convergence.
 
-🔹 7. Evaluation Metrics
+Learning rate controls speed of convergence.
 
-MAE – Mean Absolute Error
-MSE – Mean Squared Error
-RMSE – Root Mean Squared Error
-R² – Variance explained by model
+7️⃣ Model Evaluation Metrics
+MAE
 
+Average absolute difference between actual and predicted values.
+
+MSE
+
+Average squared difference.
+
+RMSE
+
+Square root of MSE. Same unit as target.
+
+R² Score
 𝑅
 2
 =
@@ -247,25 +274,95 @@ res
 
 	​
 
-🔹 8. Adjusted R²
 
-R² increases when features are added.
+Range: 0 to 1
+Higher value → Better model
+
+8️⃣ Adjusted R²
+
+R² increases when more features are added, even if they are useless.
 
 Adjusted R² penalizes unnecessary features.
 
-Used in Multiple Linear Regression.
+𝐴
+𝑑
+𝑗
+𝑢
+𝑠
+𝑡
+𝑒
+𝑑
+ 
+𝑅
+2
+=
+1
+−
+(
+1
+−
+𝑅
+2
+)
+(
+𝑛
+−
+1
+)
+(
+𝑛
+−
+𝑘
+−
+1
+)
+Adjusted R
+2
+=1−
+(n−k−1)
+(1−R
+2
+)(n−1)
+	​
 
-🔹 9. Underfitting vs Overfitting
 
-Underfitting:
-Model too simple → High bias
+Useful for comparing multiple regression models.
 
-Overfitting:
-Model too complex → High variance
+9️⃣ Underfitting vs Overfitting
+Underfitting
 
-Regularization helps control this.
+Model too simple
 
-🔹 10. Ridge Regression (L2)
+High bias
+
+Poor performance on train & test
+
+Data:   ●   ●   ●
+Model:  ----------
+
+Overfitting
+
+Model too complex
+
+High variance
+
+High train accuracy, low test accuracy
+
+Data:   ●   ●   ●
+Model:  /\/\/\/\/\/\
+
+
+Regularization helps control overfitting.
+
+🔟 Regularization
+
+Regularization adds penalty to large coefficients.
+
+New objective:
+
+Minimize (MSE + Penalty)
+
+1️⃣1️⃣ Ridge Regression (L2)
 𝑀
 𝑆
 𝐸
@@ -279,11 +376,11 @@ MSE+λ∑b
 
 Shrinks coefficients
 
+Reduces variance
+
 Handles multicollinearity
 
-Reduces overfitting
-
-🔹 11. Lasso Regression (L1)
+1️⃣2️⃣ Lasso Regression (L1)
 𝑀
 𝑆
 𝐸
@@ -295,15 +392,27 @@ Reduces overfitting
 ∣
 MSE+λ∑∣b∣
 
-Can make coefficients zero
+Shrinks coefficients
+
+Can make some exactly zero
 
 Performs feature selection
 
-Produces simpler model
-
-🔹 12. Bias-Variance Tradeoff
+1️⃣3️⃣ Bias-Variance Tradeoff
 
 Underfitting → High Bias
 Overfitting → High Variance
 
-Goal → Balance both.
+Goal: Balance bias and variance.
+
+Regularization helps achieve that balance.
+
+Final Summary
+
+Linear Regression predicts continuous values using a best-fit line.
+Residuals measure prediction error.
+Gradient Descent minimizes cost.
+R² evaluates model performance.
+Adjusted R² prevents misleading feature addition.
+Ridge and Lasso prevent overfitting using regularization.
+
